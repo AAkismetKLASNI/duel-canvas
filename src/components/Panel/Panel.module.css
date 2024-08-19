@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  background-color: #101010;
+  padding: 25px 70px;
+}
+
+.title {
+  font-size: 80px;
+  margin: 0;
+}
+
+.containerCeils {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.containerSpeedRange {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: start;
+}
+
+.containerSpeedRange input {
+  width: 100%;
+}
