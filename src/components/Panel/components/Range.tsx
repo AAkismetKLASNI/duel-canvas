@@ -25,13 +25,24 @@ export const Range: FC<RangeProps> = ({ player, option, min, max }) => {
   };
 
   return (
-    <input
-      type='range'
-      min={min}
-      max={max}
-      value={currentState}
-      onChange={option === 'rateFire' ? onChangeRateFire : onChangeInput}
-      style={{ accentColor: player.color }}
-    />
+    <div
+      style={{
+        display: 'flex',
+        width: '100%',
+      }}
+    >
+      <input
+        type='range'
+        min={min}
+        max={max}
+        value={currentState}
+        onChange={option === 'rateFire' ? onChangeRateFire : onChangeInput}
+        style={{ accentColor: player.color, width: '80%' }}
+      />
+      <span style={{ fontSize: '20px', marginLeft: 'auto' }}>
+        {player[option]}
+        {option === 'rateFire' ? 's' : 'px'}
+      </span>
+    </div>
   );
 };

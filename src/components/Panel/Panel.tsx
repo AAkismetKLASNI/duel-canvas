@@ -20,7 +20,7 @@ export const Panel = () => {
       <div className={styles.containerSpeedRange}>
         <img src={windImg} alt='wind' />
         {players.map((player) => {
-          return <Range player={player} min={1} max={5} option='speedX' />;
+          return <Range player={player} min={-5} max={5} option='speedX' />;
         })}
       </div>
       <div className={styles.containerSpeedRange}>
