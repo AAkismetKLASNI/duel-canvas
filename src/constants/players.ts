@@ -1,20 +1,20 @@
-import { ICircle } from '../types/ICircle';
+import { IPlayer } from '../types/IPlayer';
 
-export const players: ICircle[] = [
+export const players: IPlayer[] = [
   {
-    x: 200,
+    x: 475,
     y: 100,
     count: 0,
-    color: 'blue',
+    color: '#473CA5',
     radius: 35,
     speedX: 2,
     speedY: 0,
   },
   {
-    x: 750,
+    x: 475,
     y: 600,
     count: 0,
-    color: 'red',
+    color: '#F01933',
     radius: 35,
     speedX: 2,
     speedY: 0,

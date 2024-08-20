@@ -1,33 +1,36 @@
-import { ICircle } from '../types/ICircle';
-// import { useGetPlayers } from './useGetPlayers';
-import { players } from '../constants/players';
+import { IPlayer } from '../types/IPlayer';
 import { useDebounce } from './useDebounce';
+import { IBullet } from '../types/IBullet';
+import { players } from '../constants/players';
 
+//usePlayersSimulation - хранит в себе симуляцию поведения игрока
 export const usePlayersSimulation = () => {
-  // const players = useGetPlayers();
-
-  const player1 = players[0];
-  const player2 = players[1];
+  const player1: IPlayer = players[0];
+  const player2: IPlayer = players[1];
 
   let dx = 0;
   let dy = 0;
   let distance = 0;
 
-  const draw = (player: ICircle, ctx: CanvasRenderingContext2D) => {
+  //draw - отрисовывает фигуры
+  const draw = (player: IPlayer | IBullet, ctx: CanvasRenderingContext2D) => {
     ctx.fillStyle = player.color;
     ctx.beginPath();
     ctx.arc(player.x, player.y, player.radius, 0, Math.PI * 2);
     ctx.fill();
   };
 
-  const update = (player: ICircle, canvas: HTMLCanvasElement) => {
-    console.log(player.speedX);
-
-    // player.speedX = Math.min(Math.max(player.speedX, -5), 5);
-
+  //update - обновляет положение фигуры
+  const update = (player: IPlayer | IBullet) => {
     player.x += player.speedX;
     player.y += player.speedY;
+  };
 
+  //checkCollisionWithPlayer - меняет траекторию в ходе столкновения со стеной
+  const checkCollisionWithWall = (
+    player: IPlayer,
+    canvas: HTMLCanvasElement
+  ) => {
     if (
       player.x - player.radius < 0 ||
       player.x + player.radius > canvas.width
@@ -49,7 +52,8 @@ export const usePlayersSimulation = () => {
     }
   };
 
-  const checkCollision = (player1: ICircle, player2: ICircle) => {
+  //checkCollisionWithPlayer - проверяет расположение игроков относительно друг друга и меняет траекторию в ходе столкновения
+  const checkCollisionWithPlayer = (player1: IPlayer, player2: IPlayer) => {
     dx = player1.x - player2.x;
     dy = player1.y - player2.y;
 
@@ -64,10 +68,10 @@ export const usePlayersSimulation = () => {
     }
   };
 
+  //checkCollisionWithMouse - проверяет расположение игроков относительно мыши. работает баговано и раз через раз.
   const checkCollisionWithMouse = useDebounce(() => {
     addEventListener('mousemove', (event) => {
-      console.log('GO!');
-      players.forEach((player) => {
+      players.forEach((player: IPlayer) => {
         dx = player.x - event.offsetX;
         dy = player.y - event.offsetY;
         distance = Math.sqrt(dx * dx + dy * dy);
@@ -80,21 +84,20 @@ export const usePlayersSimulation = () => {
     });
   }, 150);
 
-  const handleParticles = (
+  //handlePlayers - вызывает функции выше
+  const handlePlayers = (
     ctx: CanvasRenderingContext2D,
     canvas: HTMLCanvasElement
   ) => {
-    players.forEach((player) => {
-      update(player, canvas);
+    players.forEach((player: IPlayer) => {
+      update(player);
       draw(player, ctx);
+      checkCollisionWithWall(player, canvas);
     });
 
-    checkCollision(player1, player2);
-    // checkCollisionWithMouse();
+    checkCollisionWithPlayer(player1, player2);
+    checkCollisionWithMouse();
   };
 
-  return { handleParticles };
+  return { handlePlayers };
 };
-function clamp(speedX: number, arg1: number, arg2: number): number {
-  throw new Error('Function not implemented.');
-}

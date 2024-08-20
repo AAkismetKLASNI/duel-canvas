@@ -1,2 +1,3 @@
-export * from './Ceil/Ceil';
-export * from './Range/Range';
+export * from './Ceil';
+export * from './Range';
+export * from './Pallete';

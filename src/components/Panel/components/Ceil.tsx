@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import styles from './Ceil.module.css';
 
 interface CeilProps {
   count: number;
@@ -8,7 +7,7 @@ interface CeilProps {
 
 export const Ceil: FC<CeilProps> = ({ count, color }) => {
   return (
-    <div className={styles.ceil} style={{ borderColor: color }}>
+    <div style={{ border: `2px ${color} solid`, padding: '10px 20px' }}>
       {count}
     </div>
   );

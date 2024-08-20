@@ -1,4 +1,4 @@
-import { Canvas, Panel, Container } from './components';
+import { Canvas, Container, Panel } from './components';
 
 export const App = () => {
   return (

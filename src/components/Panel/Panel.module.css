@@ -27,3 +27,8 @@
 .containerSpeedRange input {
   width: 100%;
 }
+
+.containerPallete {
+  display: flex;
+  justify-content: space-between;
+}

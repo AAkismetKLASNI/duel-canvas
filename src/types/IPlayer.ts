@@ -1,4 +1,4 @@
-export interface ICircle {
+export interface IPlayer {
   x: number;
   y: number;
   radius: number;
