@@ -5,5 +5,6 @@ export interface IPlayer {
   color: string;
   speedX: number;
   speedY: number;
+  rateFire: number;
   count: number;
 }

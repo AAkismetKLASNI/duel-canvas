@@ -1,9 +1,12 @@
-import { players } from '../constants/players';
 import { IBullet } from '../types/IBullet';
 import { IPlayer } from '../types/IPlayer';
+import { players } from '../constants/players';
+// import { useFlag } from './useFlag';
 
 export const useShotSimulation = () => {
   const bullets: IBullet[] = [];
+
+  // const { onToggleFlag } = useFlag();
 
   //draw - отрисовывает фигуры
   const draw = (bullet: IBullet, ctx: CanvasRenderingContext2D) => {
@@ -33,6 +36,8 @@ export const useShotSimulation = () => {
     };
 
     bullets.push(bullet);
+
+    setTimeout(() => shoot(player, enemy), player.rateFire * 1000);
   };
 
   //checkCollisionWithPlayer - проверяет расположение снаряда относительно стены. в случае столкновения - удаляет снаряд из массива

@@ -3,9 +3,10 @@ import { IPlayer } from '../../../types/IPlayer';
 
 interface PalleteProps {
   player: IPlayer;
+  onToggleFlag: () => void;
 }
 
-export const Pallete: FC<PalleteProps> = ({ player }) => {
+export const Pallete: FC<PalleteProps> = ({ player, onToggleFlag }) => {
   const [currentColor, setCurrentColor] = useState(player.color);
   const [isOpenPallete, setIsOpenPallete] = useState(false);
 
@@ -40,7 +41,7 @@ export const Pallete: FC<PalleteProps> = ({ player }) => {
                 }}
                 onClick={() => {
                   onClickColor(color);
-                  toggleFlag();
+                  onToggleFlag();
                 }}
               />
             );

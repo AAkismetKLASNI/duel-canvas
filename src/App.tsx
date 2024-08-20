@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Canvas, Container, Panel } from './components';
 
 export const App = () => {
@@ -5,7 +6,7 @@ export const App = () => {
     <Container>
       <Canvas
         width='950'
-        height='700'
+        height='750'
         style={{
           backgroundColor: '#101010',
         }}

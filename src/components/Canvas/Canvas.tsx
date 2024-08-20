@@ -15,20 +15,28 @@ export const Canvas = ({ ...props }) => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    const animate = () => {
+    shoot(players[0], players[1]);
+    shoot(players[1], players[0]);
+
+    const animate = (
+      ctx: CanvasRenderingContext2D,
+      canvas: HTMLCanvasElement
+    ) => {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       handlePlayers(ctx, canvas);
       handleBullets(ctx, canvas);
-      requestAnimationFrame(animate);
+      requestAnimationFrame(() => animate(ctx, canvas));
     };
 
-    animate();
-  }, [handlePlayers, handleBullets]);
+    animate(ctx, canvas);
 
-  setInterval(() => {
-    shoot(players[0], players[1]);
-    shoot(players[1], players[0]);
-  }, 1000);
+    const unmounting = () => {
+      // clearTimeout(intervalId1);
+      // clearTimeout(intervalId2);
+    };
+
+    return () => unmounting;
+  }, [shoot, handleBullets, handlePlayers]);
 
   return <canvas ref={ref} {...props} />;
 };

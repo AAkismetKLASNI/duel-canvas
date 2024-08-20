@@ -1,18 +1,12 @@
 import { Ceil, Range, Pallete } from './components';
 import { players } from '../../constants/players';
 import windImg from '../../assets/icons/wind.png';
+import bulletsImg from '../../assets/icons/bullets.png';
 import styles from './Panel.module.css';
-import { useState } from 'react';
+import { useFlag } from '../../hooks/useFlag';
 
 export const Panel = () => {
-  const [isFlag, setIsFlag] = useState(false);
-
-  const onToggleFlag = () => setIsFlag(!isFlag);
-
-  //Лучше решения правда не нашел. Надо отображать данные сразу же после изменения, но без рендеринга это невозможно.
-  setInterval(() => {
-    onToggleFlag();
-  }, 1000);
+  const { onToggleFlag } = useFlag();
 
   return (
     <div className={styles.wrapper}>
@@ -26,12 +20,18 @@ export const Panel = () => {
       <div className={styles.containerSpeedRange}>
         <img src={windImg} alt='wind' />
         {players.map((player) => {
-          return <Range player={player} />;
+          return <Range player={player} min={1} max={5} option='speedX' />;
+        })}
+      </div>
+      <div className={styles.containerSpeedRange}>
+        <img src={bulletsImg} alt='wind' />
+        {players.map((player) => {
+          return <Range player={player} min={1} max={3} option='rateFire' />;
         })}
       </div>
       <div className={styles.containerPallete}>
         {players.map((player) => {
-          return <Pallete player={player} />;
+          return <Pallete player={player} onToggleFlag={onToggleFlag} />;
         })}
       </div>
     </div>

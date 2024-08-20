@@ -9,6 +9,7 @@ export const players: IPlayer[] = [
     radius: 35,
     speedX: 2,
     speedY: 0,
+    rateFire: 1,
   },
   {
     x: 475,
@@ -18,5 +19,6 @@ export const players: IPlayer[] = [
     radius: 35,
     speedX: 2,
     speedY: 0,
+    rateFire: 1,
   },
 ];
